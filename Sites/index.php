@@ -50,13 +50,17 @@ $("button").click(function(){
 });
 
 function login(){
+  var parametros = {
+    "user": document.getElementById('input-user').value,
+    "pass": document.getElementById('input-pass').value
+  };
   $.ajax({
     type: "POST",
     url: "usuarios/login.php",
-    dataType: 'json',
-    data: {username: "success", name: "xyz", email: "abc@gmail.com"},
-    success:function(result){
-                console.log(result);}
+    data: parametros,
+    success: function(respuesta){
+      window.location = respuesta;
+    }
     // document.getElementById("content").innerHTML = response.html;
     // document.title = response.pageTitle;
     // window.history.pushState({"html":response.html,"pageTitle":response.pageTitle},"", urlPath);
@@ -130,15 +134,16 @@ section {
 <div class="form-center">
 <form align="center" method = 'post' >
     Username:
-    <input type="text" name="user" placeholder="Usuario">
+    <input id="input-user" type="text" name="user" placeholder="Usuario">
     <br><br>
     Contraseña:
-    <input type="password" name="pass" placeholder="*****">
+    <input id="input-pass" type="password" name="pass" placeholder="*****">
     <br><br>
     <input id="clickMe" type="button" value="Ingresar" onclick="login();" />
 </form>
 </div>
 <br>
 <br>
+<div id="resp"></div>
 </body>
 </html>
