@@ -95,9 +95,8 @@
         // Array de username de usuarios pasajero
         $array_usuarios_pasajero = array();
         foreach ($usuarios_pasajero as $pasajero) {
-                array_push($array_usuarios_pasajero, $pasajero[0]);
+                array_push($array_usuarios_pasajero, $pasajero[1]);
         }
-        // print_r($array_usuarios_pasajero);
          
         // Query de pasajeros en db
         $query_pasajero = "SELECT *
@@ -113,7 +112,7 @@
                 // echo "<br>";
                 array_push($array_pasajeros, array($pasajero[0], $pasajero[1]));
         }
-        // print_r($array_pasajeros);
+        print_r($array_usuarios_pasajero);
 
         // ingresar usuarios ca a db con password al azar
         foreach ($array_pasajeros as $pasajero) {
