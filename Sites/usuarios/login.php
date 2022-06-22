@@ -12,11 +12,11 @@
     $data = $result -> fetchAll();
 
     if ($data[0][0] == 'compania aerea') {
-        echo 'compania.php';
+        echo 'menu/compania.php';
     } elseif ($data[0][0] == 'admin dgac') {
-        echo 'admin.php';
+        echo 'menu/admin.php';
     } elseif ($data[0][0] == 'pasajero') {
-        echo 'pasajero.php';
+        echo 'menu/pasajero.php';
     }
 
 ?>

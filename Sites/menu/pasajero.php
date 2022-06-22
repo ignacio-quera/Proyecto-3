@@ -1,7 +1,6 @@
 <?php include('../templates/header.html'); ?>
 
-<body>
-<h1>COMPAÑIA</h1>
+<h1>PASAJERO</h1>
     
 
 <?php include('../templates/footer.html'); ?>

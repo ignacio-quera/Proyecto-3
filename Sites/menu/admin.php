@@ -1,6 +1,5 @@
 <?php include('../templates/header.html'); ?>
 
-<body>
 <h1>ADMIN</h1>
     
 
