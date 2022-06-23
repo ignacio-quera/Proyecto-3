@@ -8,6 +8,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <body>
+<?php
+  session_start();
+?>
 <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

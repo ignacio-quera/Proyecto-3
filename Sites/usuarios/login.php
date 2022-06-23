@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require("../config/conexion.php");
 
     $username = $_POST["user"];
@@ -10,6 +11,8 @@
     $result = $db -> prepare($query);
     $result -> execute();
     $data = $result -> fetchAll();
+    $_SESSION["user"] = $username;
+    $_SESSION["password"] = $password;
 
     if ($data[0][0] == 'compania aerea') {
         echo 'menu/compania.php';
