@@ -12,23 +12,17 @@
 
     $query = "SELECT vuelos.fechasalida, vuelos.codigovuelo, vuelos.llegadaicao
                 FROM vuelos
-                LEFT JOIN companiaaerea
-                ON companiaaerea.codigoca = vuelos.codigoca
-                WHERE companiaaerea.codigoca like '%$compania%' AND vuelos.estado like '%aceptado%'
-                GROUP BY companiaaerea.codigoca"; // Crear la consulta
-    $result = $db2 -> prepare($query);
+                WHERE vuelos.codigoca = '$compania' AND vuelos.estado = 'aceptado';";
+    $result = $db1 -> prepare($query);
     $result -> execute();    
     $ca_aprobado = $result -> fetchAll();
 
     $query_2 = "SELECT vuelos.fechasalida, vuelos.codigovuelo, vuelos.llegadaicao 
                 FROM vuelos
-                LEFT JOIN companiaaerea
-                ON companiaaerea.codigoca = vuelos.codigoca
-                WHERE companiaaerea.codigoca like '%$compania%' AND vuelos.estado like '%rechazado%'
-                GROUP BY companiaaerea.codigoca"; // Crear la consulta
-    $result_2 = $db2 -> prepare($query_2);
+                WHERE vuelos.codigoca = '$compania' AND vuelos.estado = 'rechazado';";
+    $result_2 = $db1 -> prepare($query_2);
     $result_2 -> execute();    
-    $ca_rechazado = $result -> fetchAll();
+    $ca_rechazado = $result_2 -> fetchAll();
 ?>
 
 <div style="margin-right:50px; margin-left:50px;" >
