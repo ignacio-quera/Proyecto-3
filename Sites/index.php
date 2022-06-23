@@ -97,6 +97,8 @@
 
 <?php
   session_start();
+  $_SESSION["user"] = null;
+  $_SESSION["password"] = null;
 ?>
 
 <body style="background-image: url('https://img.freepik.com/free-photo/model-plane-airplane-blue-background-flat-lay-design-travel-vacation-concept_152898-4815.jpg'); background-size: cover;">
