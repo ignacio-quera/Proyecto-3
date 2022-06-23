@@ -8,7 +8,7 @@
     $query = "SELECT tipo
                 FROM usuarios
                 WHERE username = '$username' AND contraseña = '$password';";
-    $result = $db -> prepare($query);
+    $result = $db1 -> prepare($query);
     $result -> execute();
     $data = $result -> fetchAll();
     $_SESSION["user"] = $username;

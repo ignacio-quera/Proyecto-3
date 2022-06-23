@@ -5,7 +5,7 @@
         // Query usuarios totales en db
         $query_usuarios = "SELECT *
                 FROM usuarios"; 
-        $result_usuarios = $db -> prepare($query_usuarios);
+        $result_usuarios = $db1 -> prepare($query_usuarios);
         $result_usuarios -> execute();    
         $usuarios = $result_usuarios -> fetchAll();
 
@@ -15,7 +15,7 @@
         $query_admin = "SELECT id, username, contraseña, tipo
         FROM usuarios
         WHERE username like '%DGAC%'"; 
-        $result_admin = $db -> prepare($query_admin);
+        $result_admin = $db1 -> prepare($query_admin);
         $result_admin -> execute();    
         $admin = $result_admin -> fetchAll();
 
@@ -26,8 +26,8 @@
          $admin_q = "INSERT INTO usuarios (id, username, contraseña, tipo)
         VALUES ('$id', 'DGAC', 'admin', 'admin dgac')";
         try {
-        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db -> exec($admin_q);
+        $db1 ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db1 -> exec($admin_q);
         echo "New record created successfully";}
         catch(PDOException $e) {
         echo "<br>";
@@ -38,7 +38,7 @@
         $query_usuarios_ca = "SELECT id, username, contraseña, tipo
         FROM usuarios
         WHERE tipo like '%compania aerea%'"; 
-        $result_usuarios_ca = $db -> prepare($query_usuarios_ca);
+        $result_usuarios_ca = $db1 -> prepare($query_usuarios_ca);
         $result_usuarios_ca -> execute();    
         $usuarios_ca = $result_usuarios_ca -> fetchAll();
 
@@ -51,7 +51,7 @@
         // Query de compañias aereas en db
         $query_ca = "SELECT *
                     FROM companiaaerea"; 
-        $result_ca = $db -> prepare($query_ca);
+        $result_ca = $db1 -> prepare($query_ca);
         $result_ca -> execute();    
         $codigos_ca = $result_ca -> fetchAll();
 
@@ -75,8 +75,8 @@
                         $user_ca = "INSERT INTO usuarios (id, username, contraseña, tipo)
                         VALUES ('$id', '$compania[0]', '$pwd', 'compania aerea')";
                         try {
-                                $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                $db -> exec($user_ca);}
+                                $db1 ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $db1 -> exec($user_ca);}
                         catch(PDOException $e) {
                                 echo "<br>";
                                  }
@@ -88,7 +88,7 @@
         $query_usuarios_pasajero = "SELECT id, username, contraseña, tipo
         FROM usuarios
         WHERE tipo like '%pasajero%'"; 
-        $result_usuarios_pasajero = $db -> prepare($query_usuarios_pasajero);
+        $result_usuarios_pasajero = $db1 -> prepare($query_usuarios_pasajero);
         $result_usuarios_pasajero -> execute();    
         $usuarios_pasajero = $result_usuarios_pasajero -> fetchAll();
  
@@ -101,7 +101,7 @@
         // Query de pasajeros en db
         $query_pasajero = "SELECT *
         FROM pasajero"; 
-        $result_pasajero = $db -> prepare($query_pasajero);
+        $result_pasajero = $db1 -> prepare($query_pasajero);
         $result_pasajero -> execute();    
         $pasajeros = $result_pasajero -> fetchAll();
         
@@ -136,8 +136,8 @@
                         $user_pasajero = "INSERT INTO usuarios (id, username, contraseña, tipo)
                         VALUES ('$id', '$pasaporte', '$pwd', 'pasajero')";
                         try {
-                                $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                $db -> exec($user_pasajero);}
+                                $db1 ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $db1 -> exec($user_pasajero);}
                         catch(PDOException $e) {
                                 echo "<br>";
                                  }
