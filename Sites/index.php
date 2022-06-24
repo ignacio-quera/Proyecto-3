@@ -18,7 +18,7 @@
       document.getElementById("spantest").textContent="Usuarios Importados!";
       $.ajax({
         type: "POST",
-        url: "usuarios/importar_usuarios.php",
+        url: "funciones/importar_usuarios.php",
       });
     });
 
@@ -29,7 +29,7 @@
       };
       $.ajax({
         type: "POST",
-        url: "usuarios/login.php",
+        url: "funciones/login.php",
         data: parametros,
         success: function(respuesta){
           window.location = respuesta;
