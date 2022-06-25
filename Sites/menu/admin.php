@@ -8,17 +8,64 @@
     }
     require("../config/conexion.php");
 
-    $query = "SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
-              vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
-              vuelos.llegadaicao
-              FROM vuelos
-              WHERE vuelos.estado = 'pendiente';";
-    $result = $db1 -> prepare($query);
-    $result -> execute();
-    $data = $result -> fetchAll();
+    if (!isset($_GET['fecha_1']) || !isset($_GET['fecha_2'])) {
+        $_GET['fecha_1'] = '';
+        $_GET['fecha_2'] = '';
+    }
+
+    if ($_GET['fecha_1'] != '' && $_GET['fecha_2'] != '') {
+        $fecha_1 = $_GET['fecha_1'];
+        $fecha_2 = $_GET['fecha_2'];
+        $query = "SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
+                  vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
+                  vuelos.llegadaicao
+                  FROM vuelos
+                  WHERE vuelos.estado = 'pendiente'
+                  AND vuelos.fechasalida >= '$fecha_1' AND vuelos.fechasalida <= '$fecha_2'
+                  UNION
+                  SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
+                  vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
+                  vuelos.llegadaicao
+                  FROM vuelos
+                  WHERE vuelos.estado = 'pendiente'
+                  AND vuelos.fechallegada >= '$fecha_1' AND vuelos.fechallegada <= '$fecha_2'
+                  UNION
+                  SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
+                  vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
+                  vuelos.llegadaicao
+                  FROM vuelos
+                  WHERE vuelos.estado = 'pendiente'
+                  AND vuelos.fechasalida <= '$fecha_1' AND vuelos.fechallegada >= '$fecha_2';";
+        $result = $db1 -> prepare($query);
+        $result -> execute();
+        $data = $result -> fetchAll();
+    } else {
+        $query = "SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
+                vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
+                vuelos.llegadaicao
+                FROM vuelos
+                WHERE vuelos.estado = 'pendiente';";
+        $result = $db1 -> prepare($query);
+        $result -> execute();
+        $data = $result -> fetchAll();
+    }
 ?>
 
 <h1>ADMIN</h1>
+
+<div style="margin-right:50px; margin-left:50px;" class="container-fluid">
+    <form action="" method="GET" class="form-inline">
+        <div class="form-group">
+            <label for="fecha_1">Fecha Inicial</label>
+            <input type="date" name="fecha_1" id="fecha_1">
+        </div>
+        <div class="form-group">
+            <label for="fecha_2">Fecha Final</label>
+            <input type="date" name="fecha_2" id="fecha_2">
+        </div>
+        <button class="btn btn-info">Buscar Vuelos</button>
+    </form>
+</div>
 
 <div style="margin-right:50px; margin-left:50px;" >
     <table align="center" class="table table-bordered" margin:4px style="width:100%">
