@@ -21,21 +21,21 @@
                   vuelos.llegadaicao
                   FROM vuelos
                   WHERE vuelos.estado = 'pendiente'
-                  AND vuelos.fechasalida >= '$fecha_1' AND vuelos.fechasalida <= '$fecha_2'
+                  AND DATE(vuelos.fechasalida) >= '$fecha_1' AND DATE(vuelos.fechasalida) <= '$fecha_2'
                   UNION
                   SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
                   vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
                   vuelos.llegadaicao
                   FROM vuelos
                   WHERE vuelos.estado = 'pendiente'
-                  AND vuelos.fechallegada >= '$fecha_1' AND vuelos.fechallegada <= '$fecha_2'
+                  AND DATE(vuelos.fechallegada) >= '$fecha_1' AND DATE(vuelos.fechallegada) <= '$fecha_2'
                   UNION
                   SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
                   vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
                   vuelos.llegadaicao
                   FROM vuelos
                   WHERE vuelos.estado = 'pendiente'
-                  AND vuelos.fechasalida <= '$fecha_1' AND vuelos.fechallegada >= '$fecha_2';";
+                  AND DATE(vuelos.fechasalida) <= '$fecha_1' AND DATE(vuelos.fechallegada) >= '$fecha_2';";
         $result = $db1 -> prepare($query);
         $result -> execute();
         $data = $result -> fetchAll();
@@ -102,6 +102,7 @@
                         <td>$vuelo[9]</td>
                         <td>
                             <form method='POST' action='../funciones/admin_vuelos.php'>
+                                <input type='hidden' name='id_vuelo' value='hola'>
                                 <input type='submit' name='aceptar' value='Aceptar'/>
                             </form>
                             <form method='POST' action='../funciones/admin_vuelos.php'>
