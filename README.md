@@ -2,9 +2,7 @@
 
 ## Consideraciones generales
 
-Para entrar en la aplicación es necesario introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse.
-
-### Cosas implementadas y no implementadas:
+Para entrar en la aplicación es necesario introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse. A continuación se hará una descripción más detallada de cómo se generaron las contraseñas para cada usuario.
 
 * **Usuario Admin**:
     * **¿Cómo se asignaron las contraseñas?**: Hacer la descripción
@@ -14,6 +12,10 @@ Para entrar en la aplicación es necesario introducir un nombre de usuario y una
 
 * **Usuario Pasajero**:
     * **¿Cómo se asignaron las contraseñas?**: Hacer la descripción
+
+### Funcionaldad Adicional
+
+Se decidió implementar como funcionalidad adicional a la página...
 
 ## Usuarios y Contraseñas
 

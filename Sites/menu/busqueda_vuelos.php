@@ -97,6 +97,7 @@
     </div>
 </form>
 
+<br>
 <h1 align="center">Estos Son Los Vuelos Disponibles Según Tu Búsqueda</h1>
 <br>
 
