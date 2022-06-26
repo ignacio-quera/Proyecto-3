@@ -16,36 +16,48 @@
     if ($_GET['fecha_1'] != '' && $_GET['fecha_2'] != '') {
         $fecha_1 = $_GET['fecha_1'];
         $fecha_2 = $_GET['fecha_2'];
-        $query = "SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
-                  vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
-                  vuelos.llegadaicao
-                  FROM vuelos
-                  WHERE vuelos.estado = 'pendiente'
-                  AND DATE(vuelos.fechasalida) >= '$fecha_1' AND DATE(vuelos.fechasalida) <= '$fecha_2'
+        $query = "SELECT fpl.codigo, compania.nombre_compania, fpl.fecha_salida, fpl.fecha_llegada, fpl.codigo_aeronave,
+                  aerodromo.nombre AS aero_salida, aerodromo2.nombre AS aero_llegada, fpl.propuesta_vuelo_id
+                  FROM fpl, aerodromo, aerodromo AS aerodromo2, propuestavuelo, compania
+                  WHERE fpl.estado = 'pendiente' AND fpl.tipo_vuelo = 'comercial'
+                  AND fpl.aerodromo_salida_id = aerodromo.aerodromo_id
+                  AND fpl.aerodromo_llegada_id = aerodromo2.aerodromo_id
+                  AND fpl.propuesta_vuelo_id = propuestavuelo.propuesta_vuelo_id
+                  AND propuestavuelo.codigo_compania = compania.codigo_compania
+                  AND DATE(fpl.fecha_salida) >= '$fecha_1' AND DATE(fpl.fecha_salida) <= '$fecha_2'
                   UNION
-                  SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
-                  vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
-                  vuelos.llegadaicao
-                  FROM vuelos
-                  WHERE vuelos.estado = 'pendiente'
-                  AND DATE(vuelos.fechallegada) >= '$fecha_1' AND DATE(vuelos.fechallegada) <= '$fecha_2'
+                  SELECT fpl.codigo, compania.nombre_compania, fpl.fecha_salida, fpl.fecha_llegada, fpl.codigo_aeronave,
+                  aerodromo.nombre AS aero_salida, aerodromo2.nombre AS aero_llegada, fpl.propuesta_vuelo_id
+                  FROM fpl, aerodromo, aerodromo AS aerodromo2, propuestavuelo, compania
+                  WHERE fpl.estado = 'pendiente' AND fpl.tipo_vuelo = 'comercial'
+                  AND fpl.aerodromo_salida_id = aerodromo.aerodromo_id
+                  AND fpl.aerodromo_llegada_id = aerodromo2.aerodromo_id
+                  AND fpl.propuesta_vuelo_id = propuestavuelo.propuesta_vuelo_id
+                  AND propuestavuelo.codigo_compania = compania.codigo_compania
+                  AND DATE(fpl.fecha_llegada) >= '$fecha_1' AND DATE(fpl.fecha_llegada) <= '$fecha_2'
                   UNION
-                  SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
-                  vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
-                  vuelos.llegadaicao
-                  FROM vuelos
-                  WHERE vuelos.estado = 'pendiente'
-                  AND DATE(vuelos.fechasalida) <= '$fecha_1' AND DATE(vuelos.fechallegada) >= '$fecha_2';";
-        $result = $db1 -> prepare($query);
+                  SELECT fpl.codigo, compania.nombre_compania, fpl.fecha_salida, fpl.fecha_llegada, fpl.codigo_aeronave,
+                  aerodromo.nombre AS aero_salida, aerodromo2.nombre AS aero_llegada, fpl.propuesta_vuelo_id
+                  FROM fpl, aerodromo, aerodromo AS aerodromo2, propuestavuelo, compania
+                  WHERE fpl.estado = 'pendiente' AND fpl.tipo_vuelo = 'comercial'
+                  AND fpl.aerodromo_salida_id = aerodromo.aerodromo_id
+                  AND fpl.aerodromo_llegada_id = aerodromo2.aerodromo_id
+                  AND fpl.propuesta_vuelo_id = propuestavuelo.propuesta_vuelo_id
+                  AND propuestavuelo.codigo_compania = compania.codigo_compania
+                  AND DATE(fpl.fecha_salida) <= '$fecha_1' AND DATE(fpl.fecha_llegada) >= '$fecha_2';";
+        $result = $db2 -> prepare($query);
         $result -> execute();
         $data = $result -> fetchAll();
     } else {
-        $query = "SELECT vuelos.codigovuelo, vuelos.codigoca, vuelos.fechasalida, vuelos.fechallegada,
-                vuelos.velocidad, vuelos.altitud, vuelos.idruta, vuelos.idnave, vuelos.salidaicao,
-                vuelos.llegadaicao
-                FROM vuelos
-                WHERE vuelos.estado = 'pendiente';";
-        $result = $db1 -> prepare($query);
+        $query = "SELECT fpl.codigo, compania.nombre_compania, fpl.fecha_salida, fpl.fecha_llegada, fpl.codigo_aeronave,
+                  aerodromo.nombre AS aero_salida, aerodromo2.nombre AS aero_llegada, fpl.propuesta_vuelo_id
+                  FROM fpl, aerodromo, aerodromo AS aerodromo2, propuestavuelo, compania
+                  WHERE fpl.estado = 'pendiente' AND fpl.tipo_vuelo = 'comercial'
+                  AND fpl.aerodromo_salida_id = aerodromo.aerodromo_id
+                  AND fpl.aerodromo_llegada_id = aerodromo2.aerodromo_id
+                  AND fpl.propuesta_vuelo_id = propuestavuelo.propuesta_vuelo_id
+                  AND propuestavuelo.codigo_compania = compania.codigo_compania;";
+        $result = $db2 -> prepare($query);
         $result -> execute();
         $data = $result -> fetchAll();
     }
@@ -74,15 +86,12 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Codigo Vuelo</th>
-                <th scope="col">Codigo Compañia</th>
+                <th scope="col">Compañia</th>
                 <th scope="col">Fecha Salida</th>
                 <th scope="col">Fecha Llegada</th>
-                <th scope="col">Velocidad</th>
-                <th scope="col">Altitud</th>
-                <th scope="col">Id Ruta</th>
-                <th scope="col">Id Aeronave</th>
-                <th scope="col">Codigo ICAO Aerodromo Salida</th>
-                <th scope="col">Codigo ICAO Aerodromo Llegada</th>
+                <th scope="col">Codigo Aeronave</th>
+                <th scope="col">Aerodromo Salida</th>
+                <th scope="col">Aerodromo Llegada</th>
                 <th></th>
             </tr>
         </thead>
@@ -97,16 +106,14 @@
                         <td>$vuelo[4]</td>
                         <td>$vuelo[5]</td>
                         <td>$vuelo[6]</td>
-                        <td>$vuelo[7]</td>
-                        <td>$vuelo[8]</td>
-                        <td>$vuelo[9]</td>
                         <td>
                             <form method='POST' action='../funciones/admin_vuelos.php'>
-                                <input type='hidden' name='id_vuelo' value='hola'>
-                                <input type='submit' name='aceptar' value='Aceptar'/>
+                                <input type='hidden' name='id_vuelo' value='$vuelo[7]'>
+                                <input type='submit' name='estado' value='aceptar'/>
                             </form>
                             <form method='POST' action='../funciones/admin_vuelos.php'>
-                                <input type='submit' name='rechazar' value='Rechazar'/>
+                                <input type='hidden' name='id_vuelo' value='$vuelo[7]'>
+                                <input type='submit' name='estado' value='rechazar'/>
                             </form>
                         </td>
                       </tr>";
