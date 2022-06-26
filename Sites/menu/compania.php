@@ -1,12 +1,11 @@
 <?php
-    include('../templates/header.html');
     session_start();
     $compania = $_SESSION["user"];
     if (is_null($compania)) {
         header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
         exit();
     }
-    echo "<h1>Vuelos de $compania</h1>";
+    include('../templates/header.html');
 
     require("../config/conexion.php");
 
@@ -27,6 +26,8 @@
     $result_2 = $db1 -> prepare($query_2);
     $result_2 -> execute();
     $ca_rechazado = $result_2 -> fetchAll();
+
+    echo "<h1>Vuelos de $compania</h1>";
 ?>
 
 <div style="margin-right:50px; margin-left:50px;" >

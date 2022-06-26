@@ -1,11 +1,12 @@
 <?php
-    include('../templates/header.html');
     session_start();
     $admin = $_SESSION["user"];
     if (is_null($admin)) {
         header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
         exit();
     }
+    include('../templates/header.html');
+
     require("../config/conexion.php");
 
     if (!isset($_GET['fecha_1']) || !isset($_GET['fecha_2'])) {
@@ -57,11 +58,11 @@
     <form action="" method="GET" class="form-inline">
         <div class="form-group">
             <label for="fecha_1">Fecha Inicial</label>
-            <input type="date" name="fecha_1" id="fecha_1">
+            <input type="date" name="fecha_1" id="fecha_1" class="form-control">
         </div>
         <div class="form-group">
             <label for="fecha_2">Fecha Final</label>
-            <input type="date" name="fecha_2" id="fecha_2">
+            <input type="date" name="fecha_2" id="fecha_2" class="form-control">
         </div>
         <button class="btn btn-info">Buscar Vuelos</button>
     </form>
