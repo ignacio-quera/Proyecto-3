@@ -13,7 +13,7 @@ Para entrar en la aplicación es necesario introducir un nombre de usuario y una
 * **Usuario Pasajero**:
     * **¿Cómo se asignaron las contraseñas?**: Hacer la descripción
 
-### Funcionaldad Adicional
+## Funcionaldad Adicional
 
 Se decidió implementar como funcionalidad adicional a la página...
 
