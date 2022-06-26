@@ -2,10 +2,9 @@
     session_start();
     $pasaporte = $_SESSION['user'];
     if (is_null($pasaporte)) {
-        header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
+        header("Location: ../index.php");
         exit();
     }
-    include('../templates/header.html');
 
     require("../config/conexion.php");
 
@@ -27,6 +26,8 @@
     $result2 = $db1 -> prepare($query2); 
     $result2 -> execute();    
     $reservas = $result2 -> fetchAll();
+
+    include('../templates/header.html');
 ?>
 
 <h1 align="center">¡Bienvenido Pasajero!</h1>

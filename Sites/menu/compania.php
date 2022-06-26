@@ -2,10 +2,9 @@
     session_start();
     $compania = $_SESSION["user"];
     if (is_null($compania)) {
-        header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
+        header("Location: ../index.php");
         exit();
     }
-    include('../templates/header.html');
 
     require("../config/conexion.php");
 
@@ -27,6 +26,7 @@
     $result_2 -> execute();
     $ca_rechazado = $result_2 -> fetchAll();
 
+    include('../templates/header.html');
     echo "<h1>Vuelos de $compania</h1>";
 ?>
 

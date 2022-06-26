@@ -2,10 +2,9 @@
     session_start();
     $admin = $_SESSION["user"];
     if (is_null($admin)) {
-        header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
+        header("Location: ../index.php");
         exit();
     }
-    include('../templates/header.html');
 
     require("../config/conexion.php");
 
@@ -50,6 +49,8 @@
         $result -> execute();
         $data = $result -> fetchAll();
     }
+
+    include('../templates/header.html');
 ?>
 
 <h1>ADMIN</h1>

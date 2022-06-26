@@ -2,10 +2,9 @@
     session_start();
     $pasaporte = $_SESSION['user'];
     if (is_null($pasaporte)) {
-        header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
+        header("Location: ../index.php");
         exit();
     }
-    include('../templates/header.html');
 
     require("../config/conexion.php");
 
@@ -65,6 +64,8 @@
     } else {
         $vuelos = null;
     }
+
+    include('../templates/header.html');
 ?>
 
 <h1 align="center">¡Aquí Puedes Buscar Vuelos!</h1>
