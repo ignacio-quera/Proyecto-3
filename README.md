@@ -13,7 +13,7 @@ Para hacer la importación de usuarios, se utilizó un archivo php llamado _impo
 * **Usuario Pasajero**:
     * **¿Cómo se asignaron las contraseñas?**: Se agarró el pasaporte del pasajero y su nombre, se mezclaron los strings y después se tomó un largo de entre 6 y 12 caracteres para generar la contraseña.
 
-### Funcionaldad Adicional
+## Funcionaldad Adicional
 
 Se decidió implementar como funcionalidad adicional a la página la opción de filtrar las reservas del pasajero dependiendo del origen y del destino. Para realizar la correción de esta funcionalidad, hay que entrar con algún usuario pasajero, y en la página donde salen su nombre y su pasaporte filtrar por las ciudades. Luego, ahí mismo se podrá ver qué vuelos tiene cada pasajero reservado para esos parámetros.
 
