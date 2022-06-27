@@ -2,7 +2,7 @@
 
 ## Consideraciones generales
 
-Para entrar en la aplicación es necesario introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse. A continuación se hará una descripción más detallada de cómo se generaron las contraseñas para cada usuario.
+Para hacer la importación de usuarios, se utilizó un archivo php llamado _importar_usuarios_ que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse. Estos se encuentran en una tabla ubicada más abajo. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
 
 * **Usuario Admin**:
     * **¿Cómo se asignaron las contraseñas?**: Se asigna por enunciado.
