@@ -55,6 +55,27 @@
     $result4 -> execute();
     $destino_vuelos = $result4 -> fetchAll();
 
+    // query sin filtrar
+    $query_sin_filtrar ="SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, tickets_pasajero.id
+                        FROM vuelos, companiaaerea, ticket,
+                        (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
+                        FROM aerodromo) as origenes,
+                        (SELECT aerodromo.codigoicao as dest, aerodromo.ciudad as ciudad
+                        FROM aerodromo) as destinos,
+                        (SELECT reserva.idticket as id
+                        FROM reserva
+                        WHERE reserva.npasaportereservador like '%$pasaporte%') as tickets_pasajero
+                        WHERE vuelos.salidaicao LIKE origenes.orig
+                        AND vuelos.llegadaicao LIKE destinos.dest
+                        AND vuelos.idvuelo LIKE ticket.idvuelo
+                        AND tickets_pasajero.id LIKE ticket.idticket
+                        AND companiaaerea.codigoca = vuelos.codigoca
+                        ORDER BY vuelos.idvuelo ASC;";
+
+    $sin_filtro= $db2 -> prepare($query_sin_filtrar);
+    $sin_filtro -> execute();
+    $reservas_sin_filtro = $sin_filtro -> fetchAll();
+
     // resultados
     if (!isset($_GET['origen']) || !isset($_GET['destino']) || !isset($_GET['fecha'])) {
         $_GET['origen'] = '';
@@ -67,20 +88,21 @@
         $destino = $_GET['destino'];
         $fecha = $_GET['fecha'];
 
-        $query_vuelos = "SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, ticket.idticket
-                         FROM vuelos, companiaaerea, ticket, (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
-                                                      FROM aerodromo
-                                                      WHERE aerodromo.ciudad LIKE '%$origen%') as origenes,
+        $query_vuelos = "SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, tickets_pasajero.id
+                         FROM vuelos, companiaaerea, ticket,
+                         (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
+                          FROM aerodromo
+                          WHERE aerodromo.ciudad LIKE '%$origen%') as origenes,
                          (SELECT aerodromo.codigoicao as dest, aerodromo.ciudad as ciudad
                           FROM aerodromo
                           WHERE aerodromo.ciudad LIKE '%$destino%') as destinos,
-                          (SELECT reserva.idreserva as reserva, reserva.idticket as id
-                           FROM reserva
-                           WHERE reserva.npasaportereservador like '%$pasaporte%') as datos_pasajero
+                         (SELECT reserva.idticket as id
+                          FROM reserva
+                          WHERE reserva.npasaportereservador like '%$pasaporte%') as tickets_pasajero
                          WHERE vuelos.salidaicao LIKE origenes.orig
                          AND vuelos.llegadaicao LIKE destinos.dest
                          AND vuelos.idvuelo LIKE ticket.idvuelo
-                         AND datos_pasajero.id LIKE ticket.idticket
+                         AND tickets_pasajero.id LIKE ticket.idticket
                          AND companiaaerea.codigoca = vuelos.codigoca
                          ORDER BY vuelos.idvuelo ASC;";
 
@@ -89,7 +111,7 @@
     $resultados -> execute();
     $vuelos = $resultados -> fetchAll();
     } else {
-        $vuelos = null;
+        $vuelos = $reservas_sin_filtro;
     }
 
 ?>
