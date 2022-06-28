@@ -26,23 +26,30 @@
     $result_2 -> execute();
     $ca_rechazado = $result_2 -> fetchAll();
 
+    $querycompania = "SELECT companiaaerea.nombre
+                      FROM companiaaerea
+                      WHERE companiaaerea.codigoca = '$compania';";
+    $result_c = $db1 -> prepare($querycompania);
+    $result_c -> execute();
+    $nombre_compania = $result_c -> fetch();
+
     include('../templates/header.html');
-    echo "<h1>Vuelos de $compania</h1>";
+    echo "<h1 class='title'>Vuelos de $nombre_compania[0]</h1>";
 ?>
 
-<div style="margin-right:50px; margin-left:50px;" >
+<div>
     <h3>Vuelos aprobados</h3>
-    <table align="center" class="table table-bordered" margin:4px style="width:100%">
-        <thead class="thead-dark">
+    <table class="table is-bordered is-hoverable is-fullwidth">
+        <thead class="has-background-grey-dark">
         <tr>
-            <th scope="col">Codigo Vuelo</th>
-            <th scope="col">Fecha Salida</th>
-            <th scope="col">Fecha Llegada</th>
-            <th scope="col">Velocidad</th>
-            <th scope="col">Altitud</th>
-            <th scope="col">Id Aeronave</th>
-            <th scope="col">Codigo ICAO Aerodromo Salida</th>
-            <th scope="col">Codigo ICAO Aerodromo Llegada</th>
+            <th scope="col" class="has-text-white">Codigo Vuelo</th>
+            <th scope="col" class="has-text-white">Fecha Salida</th>
+            <th scope="col" class="has-text-white">Fecha Llegada</th>
+            <th scope="col" class="has-text-white">Velocidad</th>
+            <th scope="col" class="has-text-white">Altitud</th>
+            <th scope="col" class="has-text-white">Id Aeronave</th>
+            <th scope="col" class="has-text-white">Codigo ICAO Aerodromo Salida</th>
+            <th scope="col" class="has-text-white">Codigo ICAO Aerodromo Llegada</th>
         </tr>
         </thead>
         <tbody>
@@ -63,19 +70,19 @@
         </tbody>
     </table>
 </div>
-<div style="margin-right:50px; margin-left:50px;" >
+<div>
     <h3>Vuelos rechazados</h3>
-    <table align="center" class="table table-bordered" margin:4px style="width:100%">
-        <thead class="thead-dark">
+    <table class="table is-bordered is-hoverable is-fullwidth">
+        <thead class="has-background-grey-dark">
             <tr>
-                <th scope="col">Codigo Vuelo</th>
-                <th scope="col">Fecha Salida</th>
-                <th scope="col">Fecha Llegada</th>
-                <th scope="col">Velocidad</th>
-                <th scope="col">Altitud</th>
-                <th scope="col">Id Aeronave</th>
-                <th scope="col">Codigo ICAO Aerodromo Salida</th>
-                <th scope="col">Codigo ICAO Aerodromo Llegada</th>
+                <th scope="col" class="has-text-white">Codigo Vuelo</th>
+                <th scope="col" class="has-text-white">Fecha Salida</th>
+                <th scope="col" class="has-text-white">Fecha Llegada</th>
+                <th scope="col" class="has-text-white">Velocidad</th>
+                <th scope="col" class="has-text-white">Altitud</th>
+                <th scope="col" class="has-text-white">Id Aeronave</th>
+                <th scope="col" class="has-text-white">Codigo ICAO Aerodromo Salida</th>
+                <th scope="col" class="has-text-white">Codigo ICAO Aerodromo Llegada</th>
             </tr>
         </thead>
         <tbody>
