@@ -37,8 +37,8 @@
     echo "<h1 class='title'>Vuelos de $nombre_compania[0]</h1>";
 ?>
 
+<h3 class="title is-4 box">Vuelos aprobados</h3>
 <div>
-    <h3>Vuelos aprobados</h3>
     <table class="table is-bordered is-hoverable is-fullwidth">
         <thead class="has-background-grey-dark">
         <tr>
@@ -70,8 +70,9 @@
         </tbody>
     </table>
 </div>
+<br>
+<h3 class="title is-4 box">Vuelos rechazados</h3>
 <div>
-    <h3>Vuelos rechazados</h3>
     <table class="table is-bordered is-hoverable is-fullwidth">
         <thead class="has-background-grey-dark">
             <tr>
