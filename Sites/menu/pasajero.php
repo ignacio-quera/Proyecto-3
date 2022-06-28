@@ -72,7 +72,7 @@
                         AND companiaaerea.codigoca = vuelos.codigoca
                         ORDER BY vuelos.idvuelo ASC;";
 
-    $sin_filtro= $db2 -> prepare($query_sin_filtrar);
+    $sin_filtro= $db1 -> prepare($query_sin_filtrar);
     $sin_filtro -> execute();
     $reservas_sin_filtro = $sin_filtro -> fetchAll();
 
@@ -136,7 +136,8 @@
         </tbody>
     </table>
 </div>
-
+<br>
+<br>
 <h1 align="center">Aquí Puedes Filtrar Tus Vuelos</h1>
     <br>
     
@@ -191,7 +192,17 @@
                                     <td>$datos[4]</td>
                                 </tr>";
                         }
+                    } else {
+                        foreach($reservas_sin_filtro as $datos){
+                            echo "<tr>
+                                    <td>$datos[0]</td>
+                                    <td>$datos[1]</td>
+                                    <td>$datos[2]</td>
+                                    <td>$datos[3]</td>
+                                    <td>$datos[4]</td>
+                                </tr>";
                     }
+                }
                 ?>
             </tbody>
         </table>
@@ -204,6 +215,7 @@
         <button>Buscar Más Vuelos</button>
     </div>
 </form>
+<br>
 </body>
 </html>
 
