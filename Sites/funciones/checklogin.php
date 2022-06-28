@@ -2,8 +2,8 @@
     session_start();
     require("../config/conexion.php");
 
-    $username = $_POST["user"];
-    $password = $_POST["pass"];
+    $username = $_SESSION["user"];
+    $password = $_SESSION["password"];
 
     $query = "SELECT tipo
                 FROM usuarios
@@ -11,15 +11,19 @@
     $result = $db1 -> prepare($query);
     $result -> execute();
     $data = $result -> fetch();
-    $_SESSION["user"] = $username;
-    $_SESSION["password"] = $password;
-
+    
     if ($data[0] == 'compania aerea') {
-        echo 'menu/compania.php';
+        header("Location: ../menu/compania.php");
+        exit();
     } elseif ($data[0] == 'admin dgac') {
-        echo 'menu/admin.php';
+        header("Location: ../menu/admin.php");
+        exit();
     } elseif ($data[0] == 'pasajero') {
-        echo 'menu/pasajero.php';
+        header("Location: ../menu/pasajero.php");
+        exit();
+    } else {
+        session_destroy();
+        header("Location: ../index.php");
+        exit();
     }
-
 ?>
