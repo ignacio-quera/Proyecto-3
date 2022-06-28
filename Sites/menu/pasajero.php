@@ -77,16 +77,15 @@
     $reservas_sin_filtro = $sin_filtro -> fetchAll();
 
     // resultados
-    if (!isset($_GET['origen']) || !isset($_GET['destino']) || !isset($_GET['fecha'])) {
+    if (!isset($_GET['origen']) || !isset($_GET['destino'])) {
         $_GET['origen'] = '';
         $_GET['destino'] = '';
-        $_GET['fecha'] = '';
+        $vuelos = null;
     }
 
-    if ($_GET['origen'] != '' && $_GET['destino'] != '' && $_GET['fecha'] != '') {
+    if ($_GET['origen'] != '' && $_GET['destino'] != '') {
         $origen = $_GET['origen'];
         $destino = $_GET['destino'];
-        $fecha = $_GET['fecha'];
 
         $query_vuelos = "SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, tickets_pasajero.id
                          FROM vuelos, companiaaerea, ticket,
@@ -111,7 +110,7 @@
     $resultados -> execute();
     $vuelos = $resultados -> fetchAll();
     } else {
-        $vuelos = $reservas_sin_filtro;
+        $vuelos = null;
     }
 
 ?>
@@ -176,7 +175,7 @@
                     <th scope="col">Destino</th>
                     <th scope="col">Fecha Salida</th>
                     <th scope="col">Fecha Llegada</th>
-                    <th scope="col">ID Del Ticket</th>
+                    <th scope="col">ID Ticket</th>
                     <th></th>
                 </tr>
             </thead>
@@ -190,6 +189,7 @@
                                     <td>$datos[2]</td>
                                     <td>$datos[3]</td>
                                     <td>$datos[4]</td>
+                                    <td>$datos[5]</td>
                                 </tr>";
                         }
                     } else {
@@ -200,6 +200,7 @@
                                     <td>$datos[2]</td>
                                     <td>$datos[3]</td>
                                     <td>$datos[4]</td>
+                                    <td>$datos[5]</td>
                                 </tr>";
                     }
                 }
