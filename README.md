@@ -2,20 +2,20 @@
 
 ## Consideraciones generales
 
-Para entrar en la aplicación es necesario introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse. A continuación se hará una descripción más detallada de cómo se generaron las contraseñas para cada usuario.
+Para hacer la importación de usuarios, se utilizó un archivo php llamado _importar_usuarios_ que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse. Estos se encuentran en una tabla ubicada más abajo. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
 
 * **Usuario Admin**:
-    * **¿Cómo se asignaron las contraseñas?**: Hacer la descripción
+    * **¿Cómo se asignaron las contraseñas?**: Se asigna por enunciado.
 
 * **Usuario Compañía Aerea**:
-    * **¿Cómo se asignaron las contraseñas?**: Hacer la descripción
+    * **¿Cómo se asignaron las contraseñas?**: Para generar estas contraseñas, se generó una cadena de 4 bytes aleatoria y luego estos fueron pasados a números. El órden es completamente al azar.
 
 * **Usuario Pasajero**:
-    * **¿Cómo se asignaron las contraseñas?**: Hacer la descripción
+    * **¿Cómo se asignaron las contraseñas?**: Se agarró el pasaporte del pasajero y su nombre, se mezclaron los strings y después se tomó un largo de entre 6 y 12 caracteres para generar la contraseña.
 
 ## Funcionaldad Adicional
 
-Se decidió implementar como funcionalidad adicional a la página...
+Se decidió implementar como funcionalidad adicional la opción de filtrar las reservas del pasajero dependiendo del origen y del destino. Para realizar la correción de esta funcionalidad, hay que entrar con algún usuario pasajero, y en la página donde salen su nombre y su pasaporte, filtrar por las ciudades. Luego, ahí mismo se podrá ver qué vuelos tiene cada pasajero reservado para esos parámetros. También se da la opción de resetear la búsqueda y que vuelvan a aparecer todas sus reservas. Se consideró implementar de manera adicional los filtros de hora y fecha de salida de los vuelos, pero considerando que un pasajero no tiene tantas reservas para las mismas cuidades en distintas fechas, no nos pareció que iban a aportar a la búsqueda por lo específico que era (a diferencia de lo útil que puede resultar un filtro similar para hacer las reservas de un nuevo vuelo). 
 
 ## Usuarios y Contraseñas
 
