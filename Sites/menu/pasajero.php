@@ -14,7 +14,7 @@
               WHERE pasajero.npasaporte like '%$pasaporte%';";
     $result = $db1 -> prepare($query);
     $result -> execute();
-    $pasajero = $result -> fetchAll();
+    $pasajero = $result -> fetch();
 
     // query pasajes
 
@@ -84,96 +84,93 @@
     include('../templates/header.html');
 ?>
 
-<h1 align="center">¡Bienvenido Pasajero!</h1>
-<br>
-<div style="margin-right:50px; margin-left:50px;" >
-    <table align="center" class="table table-bordered" margin:4px style="width:100%">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nombre Completo</th>
-                <th scope="col">Número de Pasaporte</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                foreach($pasajero as $datos){
-                    echo "<tr><td>$datos[0]</td><td>$datos[1]</td></tr>";
-                }
-            ?>
-        </tbody>
-    </table>
+<h1 class="title is-2">¡Bienvenido Pasajero!</h1>
+
+<div class="box">
+    <h1 class='title is-4'>Informacion</h1>
+    <div class="columns">
+        <div class="column is-one-quarter"><strong>Nombre Completo:</strong></div>
+        <div class="column"><?php echo "$pasajero[0]"?></div>
+    </div>
+    <div class="columns">
+        <div class="column is-one-quarter"><strong>Número de Pasaporte:</strong></div>
+        <div class="column"><?php echo "$pasajero[1]"?></div>
+    </div>
 </div>
-<br>
-<br>
-<h1 align="center">Aquí Puedes Filtrar Tus Vuelos</h1>
-    <br>
-    
+
+<h1 class="title is-3">Tus Reservas</h1>
+
+<div class="level box">
+    <div class="level-left">
+        <div class='level-item'>
+            <h1 class="title is-black is-4">Filtrar</h1>
+        </div>
+    </div>
     <form action="" method="GET">
-        <div style="text-align:center">
-            <label for="origen">Ciudad de Origen:</label>
-            <select name="origen" id="origen">
+        <div class="level-right">
+            <label for="origen" class="level-item"><strong>Ciudad de Origen:</strong></label>
+            <select name="origen" id="origen" class="level-item select">
                 <?php
                     foreach($origen_vuelos as $datos){
                         echo "<option> $datos[0]</opcion>";
                     }
                 ?>
             </select>
-    
-            <label for="destino">Ciudad de Destino:</label>
-            <select name="destino" id="destino">
+
+            <label for="destino" class="level-item"><strong>Ciudad de Destino:</strong></label>
+            <select name="destino" id="destino" class="level-item select">
                 <?php
                     foreach($destino_vuelos as $datos){
                         echo "<option> $datos[0]</opcion>";
                     }
                 ?>
             </select>
-    
-            <input type="submit" value="Buscar"/>
+
+            <input type="submit" value="Buscar" class="button is-info level-item"/>
+        </form>
+        
+        <form action="" method="GET">
+            <input type="submit" value="Resetear Filtro" class="button is-light level-item"/>
         </div>
     </form>
-    <form action="" method="GET">
-        <input type="submit" value="Resetear Filtro"/>
-    </form>
+</div>
 
-    <br>
-    
-    <div style="margin-right:50px; margin-left:50px;" >
-        <table align="center" class="table table-bordered" margin:4px style="width:100%">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Compañía Aérea</th>
-                    <th scope="col">Origen</th>
-                    <th scope="col">Destino</th>
-                    <th scope="col">Fecha Salida</th>
-                    <th scope="col">Fecha Llegada</th>
-                    <th scope="col">ID Del Ticket</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    foreach($vuelos as $datos){
-                        echo "<tr>
-                                <td>$datos[0]</td>
-                                <td>$datos[1]</td>
-                                <td>$datos[2]</td>
-                                <td>$datos[3]</td>
-                                <td>$datos[4]</td>
-                                <td>$datos[5]</td>
-                            </tr>";
-                    }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    
-    <br>
+<div>
+    <table class="table is-bordered is-fullwidth">
+        <thead class="has-background-grey-dark">
+            <tr>
+                <th scope="col" class="has-text-white">Compañía Aérea</th>
+                <th scope="col" class="has-text-white">Origen</th>
+                <th scope="col" class="has-text-white">Destino</th>
+                <th scope="col" class="has-text-white">Fecha Salida</th>
+                <th scope="col" class="has-text-white">Fecha Llegada</th>
+                <th scope="col" class="has-text-white">ID Del Ticket</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach($vuelos as $datos){
+                    echo "<tr>
+                            <td>$datos[0]</td>
+                            <td>$datos[1]</td>
+                            <td>$datos[2]</td>
+                            <td>$datos[3]</td>
+                            <td>$datos[4]</td>
+                            <td>$datos[5]</td>
+                        </tr>";
+                }
+            ?>
+        </tbody>
+    </table>
+</div>
 
-<form action="busqueda_vuelos.php" method="GET">
+<br>
+
+<form action="busqueda_vuelos.php">
     <div style="text-align:center">
-        <button>Buscar Más Vuelos</button>
+        <button class="button is-info">Buscar Más Vuelos</button>
     </div>
 </form>
-<br>
+</div>
 </body>
 </html>
