@@ -84,6 +84,9 @@
             <label for="fecha_2" class="level-item"><strong>Fecha Final</strong></label>
             <input type="date" name="fecha_2" id="fecha_2" class="button level-item">
             <button class="button is-info level-item">Buscar Vuelos</button>
+    </form>
+    <form action="" method="GET">
+            <input type="submit" value="Resetear Filtro" class="button is-light level-item"/>
         </div>
     </form>
 </div>
