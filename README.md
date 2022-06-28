@@ -2,7 +2,7 @@
 
 ## Consideraciones generales
 
-Para hacer la importación de usuarios, se utilizó un archivo php llamado _importar_usuarios_ que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logerse. Estos se encuentran en una tabla ubicada más abajo. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
+Para hacer la importación de usuarios, se utilizó un archivo php llamado ``importar_usuarios`` que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logearse. Estos se encuentran en una tabla ubicada más abajo. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
 
 * **Usuario Admin**:
     * **¿Cómo se asignaron las contraseñas?**: Se asigna por enunciado.
@@ -21,7 +21,7 @@ Se decidió implementar como funcionalidad adicional la opción de filtrar las r
 
 ID  | USUARIO | CONTRASEÑA    |  TIPO
 ----|-------- | ------------- | -------------
-1 |	DGAC |	admin	| admin | dgac
+1 |	DGAC |	admin	| admin dgac
 2|	IBE	| e0a172ce	| compania aerea
 3|	XLE |	8824db09 |	compania aerea
 4|	ADC |	833a8fdf |	compania aerea
