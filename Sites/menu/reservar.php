@@ -34,7 +34,9 @@
         $data = $result -> fetchAll();
         
         print_r($data);
-        $mensaje = $data[0];
+        $m = $data[0];
+        $mensaje = $m[0];
+
     }
 ?>  
 <h1 align="center">Ingrese Los Pasaportes Para</h1>
@@ -67,38 +69,39 @@
 </form>
 <?php
                 if (!is_null($mensaje)) {
-                    if ($mensaje = 'No se ingresaron pasajeros para reservar') {
+                    console.log(sentence);
+                    if ($mensaje == 'No se ingresaron pasajeros para reservar') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("Se debe ingresar por lo menos un pasajero!");
+                        alert("Se debe ingresar por lo menos un pasajero!");
                         </script>';
                     }
-                    elseif ($mensaje ='No existen lo pasajaeros con el primer pasaporte') {
+                    elseif ($mensaje =='No existen pasajeros con el primer pasaporte') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("El primer pasaporte no existe!");
+                        alert("El primer pasaporte no existe!");
                         </script>';
-                    } elseif ($mensaje ='No existen lo pasajaeros con el segundo pasaporte') {
+                    } elseif ($mensaje =='No existen pasajeros con el segundo pasaporte') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("El segundo pasaporte no existe!");
+                        alert("El segundo pasaporte no existe!");
                         </script>';
-                    } elseif ($mensaje ='No existen lo pasajaeros con el tercer pasaporte') {
+                    } elseif ($mensaje == 'No existen pasajeros con el tercer pasaporte') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("El tercer pasaporte no existe!");
+                        alert("El tercer pasaporte no existe!");
                         </script>';
-                    } elseif ($mensaje ='Choque temporal del pasajero de pasaporte $pasaporte1') {
+                    } elseif ($mensaje == 'Choque temporal del pasajero de pasaporte $pasaporte1') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("El pasajero de pasaporte $pasaporte1 tiene un tope con otro vuelo!");
+                        alert("El pasajero de pasaporte $pasaporte1 tiene un tope con otro vuelo!");
                         </script>';
-                    } elseif ($mensaje ='Choque temporal del pasajero de pasaporte $pasaporte2') {
+                    } elseif ($mensaje == 'Choque temporal del pasajero de pasaporte $pasaporte2') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("El pasajero de pasaporte $pasaporte2 tiene un tope con otro vuelo!");
+                        alert("El pasajero de pasaporte $pasaporte2 tiene un tope con otro vuelo!");
                         </script>';
-                    } elseif ($mensaje ='Choque temporal del pasajero de pasaporte $pasaporte3') {
+                    } elseif ($mensaje == 'Choque temporal del pasajero de pasaporte $pasaporte3') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("El pasajero de pasaporte $pasaporte3 tiene un tope con otro vuelo!");
+                        alert("El pasajero de pasaporte $pasaporte3 tiene un tope con otro vuelo!");
                         </script>';
-                    } elseif ($mensaje ='reserva creada') {
+                    } elseif ($mensaje == 'reserva creada') {
                         echo '<script type="text/JavaScript"> 
-                        prompt("La reserva fue creada con éxito!");
+                        alert("La reserva fue creada con éxito!");
                         </script>';
                     } 
                 }

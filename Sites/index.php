@@ -19,6 +19,7 @@
       $.ajax({
         type: "POST",
         url: "funciones/importar_usuarios.php",
+        // sucess: function(respuesta)
       });
     };
 
