@@ -55,32 +55,53 @@
     $result4 -> execute();
     $destino_vuelos = $result4 -> fetchAll();
 
+    // query sin filtrar
+    $query_sin_filtrar ="SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, tickets_pasajero.id
+                        FROM vuelos, companiaaerea, ticket,
+                        (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
+                        FROM aerodromo) as origenes,
+                        (SELECT aerodromo.codigoicao as dest, aerodromo.ciudad as ciudad
+                        FROM aerodromo) as destinos,
+                        (SELECT reserva.idticket as id
+                        FROM reserva
+                        WHERE reserva.npasaportereservador like '%$pasaporte%') as tickets_pasajero
+                        WHERE vuelos.salidaicao LIKE origenes.orig
+                        AND vuelos.llegadaicao LIKE destinos.dest
+                        AND vuelos.idvuelo LIKE ticket.idvuelo
+                        AND tickets_pasajero.id LIKE ticket.idticket
+                        AND companiaaerea.codigoca = vuelos.codigoca
+                        ORDER BY vuelos.idvuelo ASC;";
+
+    $sin_filtro= $db1 -> prepare($query_sin_filtrar);
+    $sin_filtro -> execute();
+    $reservas_sin_filtro = $sin_filtro -> fetchAll();
+
     // resultados
-    if (!isset($_GET['origen']) || !isset($_GET['destino']) || !isset($_GET['fecha'])) {
+    if (!isset($_GET['origen']) || !isset($_GET['destino'])) {
         $_GET['origen'] = '';
         $_GET['destino'] = '';
-        $_GET['fecha'] = '';
+        $vuelos = null;
     }
 
-    if ($_GET['origen'] != '' && $_GET['destino'] != '' && $_GET['fecha'] != '') {
+    if ($_GET['origen'] != '' && $_GET['destino'] != '') {
         $origen = $_GET['origen'];
         $destino = $_GET['destino'];
-        $fecha = $_GET['fecha'];
 
-        $query_vuelos = "SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, ticket.idticket
-                         FROM vuelos, companiaaerea, ticket, (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
-                                                      FROM aerodromo
-                                                      WHERE aerodromo.ciudad LIKE '%$origen%') as origenes,
+        $query_vuelos = "SELECT companiaaerea.nombre, origenes.ciudad, destinos.ciudad, vuelos.fechasalida, vuelos.fechallegada, tickets_pasajero.id
+                         FROM vuelos, companiaaerea, ticket,
+                         (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
+                          FROM aerodromo
+                          WHERE aerodromo.ciudad LIKE '%$origen%') as origenes,
                          (SELECT aerodromo.codigoicao as dest, aerodromo.ciudad as ciudad
                           FROM aerodromo
                           WHERE aerodromo.ciudad LIKE '%$destino%') as destinos,
-                          (SELECT reserva.idreserva as reserva, reserva.idticket as id
-                           FROM reserva
-                           WHERE reserva.npasaportereservador like '%$pasaporte%') as datos_pasajero
+                         (SELECT reserva.idticket as id
+                          FROM reserva
+                          WHERE reserva.npasaportereservador like '%$pasaporte%') as tickets_pasajero
                          WHERE vuelos.salidaicao LIKE origenes.orig
                          AND vuelos.llegadaicao LIKE destinos.dest
                          AND vuelos.idvuelo LIKE ticket.idvuelo
-                         AND datos_pasajero.id LIKE ticket.idticket
+                         AND tickets_pasajero.id LIKE ticket.idticket
                          AND companiaaerea.codigoca = vuelos.codigoca
                          ORDER BY vuelos.idvuelo ASC;";
 
@@ -114,7 +135,8 @@
         </tbody>
     </table>
 </div>
-
+<br>
+<br>
 <h1 align="center">Aquí Puedes Filtrar Tus Vuelos</h1>
     <br>
     
@@ -153,7 +175,7 @@
                     <th scope="col">Destino</th>
                     <th scope="col">Fecha Salida</th>
                     <th scope="col">Fecha Llegada</th>
-                    <th scope="col">ID Del Ticket</th>
+                    <th scope="col">ID Ticket</th>
                     <th></th>
                 </tr>
             </thead>
@@ -167,9 +189,21 @@
                                     <td>$datos[2]</td>
                                     <td>$datos[3]</td>
                                     <td>$datos[4]</td>
+                                    <td>$datos[5]</td>
                                 </tr>";
                         }
+                    } else {
+                        foreach($reservas_sin_filtro as $datos){
+                            echo "<tr>
+                                    <td>$datos[0]</td>
+                                    <td>$datos[1]</td>
+                                    <td>$datos[2]</td>
+                                    <td>$datos[3]</td>
+                                    <td>$datos[4]</td>
+                                    <td>$datos[5]</td>
+                                </tr>";
                     }
+                }
                 ?>
             </tbody>
         </table>
@@ -182,6 +216,7 @@
         <button>Buscar Más Vuelos</button>
     </div>
 </form>
+<br>
 </body>
 </html>
 
