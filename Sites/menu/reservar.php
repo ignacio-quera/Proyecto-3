@@ -107,7 +107,7 @@
                             </script>';
                         } elseif ($mensaje == "Choque temporal del pasajero de pasaporte $pasaporte3") {
                             echo '<script type="text/JavaScript"> 
-                            alert("El pasajero de la tercera entrada un tope con otro vuelo!");
+                            alert("El pasajero de la tercera entrada tiene un tope con otro vuelo!");
                             </script>';
                         } elseif ($mensaje == 'reserva creada') {
                             echo '<script type="text/JavaScript"> 
