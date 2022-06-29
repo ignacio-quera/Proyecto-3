@@ -2,7 +2,7 @@
 
 ## Consideraciones generales
 
-Para hacer la importación de usuarios, se utilizó un archivo php llamado ``importar_usuarios`` que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logearse. Estos se encuentran en una tabla ubicada más abajo en la sección _Usuarios y Contraseñas_. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
+Para hacer la importación de usuarios, se utilizó un archivo php llamado ``importar_usuarios`` que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logearse. En caso de que el usuario ya este logeado la pagina princial redireccionará a la pagina correspondiente. Estos se encuentran en una tabla ubicada más abajo en la sección _Usuarios y Contraseñas_. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
 
 * **Usuario Admin**:
     * **¿Cómo se asignó la contraseña?**: Se asigna por enunciado.
