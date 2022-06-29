@@ -2,15 +2,15 @@
 
 ## Consideraciones generales
 
-Para hacer la importación de usuarios, se utilizó un archivo php llamado ``importar_usuarios`` que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logearse. Estos se encuentran en una tabla ubicada más abajo. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
+Para hacer la importación de usuarios, se utilizó un archivo php llamado ``importar_usuarios`` que se encuentra en la carpeta _funciones_ dentro de _Sites_. Al ingresar a la página se pide introducir un nombre de usuario y una contraseña, dependiendo del tipo de usuario que quiere logearse. Estos se encuentran en una tabla ubicada más abajo en la sección _Usuarios y Contraseñas_. A continuación se hará una descripción detallada de cómo se generaron las contraseñas para cada tipo de usuario.
 
 * **Usuario Admin**:
-    * **¿Cómo se asignaron las contraseñas?**: Se asigna por enunciado.
+    * **¿Cómo se asignó la contraseña?**: Se asigna por enunciado.
 
-* **Usuario Compañía Aerea**:
+* **Usuarios Compañía Aerea**:
     * **¿Cómo se asignaron las contraseñas?**: Para generar estas contraseñas, se generó una cadena de 4 bytes aleatoria y luego estos fueron pasados a números. El órden es completamente al azar.
 
-* **Usuario Pasajero**:
+* **Usuarios Pasajero**:
     * **¿Cómo se asignaron las contraseñas?**: Se agarró el pasaporte del pasajero y su nombre, se mezclaron los strings y después se tomó un largo de entre 6 y 12 caracteres para generar la contraseña.
 
 ## Funcionaldad Adicional
