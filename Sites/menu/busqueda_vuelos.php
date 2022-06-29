@@ -44,6 +44,10 @@
         $destino = $_GET['destino'];
         $fecha = $_GET['fecha'];
 
+        $_SESSION['origen'] = $origen;
+        $_SESSION['destino'] = $destino;
+        $_SESSION['fecha'] = $fecha;
+
         $query_vuelos = "SELECT companiaaerea.nombre, vuelos.codigovuelo, origenes.ciudad, vuelos.fechasalida, destinos.ciudad, vuelos.fechallegada
                          FROM vuelos, companiaaerea, (SELECT aerodromo.codigoicao as orig, aerodromo.ciudad as ciudad
                                                       FROM aerodromo
@@ -141,6 +145,9 @@
                                 <td>$datos[5]</td>
                                 <td>
                                     <form method='GET' action='reservar.php'>
+                                        <input type='hidden' name='origen' value='$origen' />
+                                        <input type='hidden' name='destino' value='$destino' />
+                                        <input type='hidden' name='fecha' value='$fecha' />
                                         <input type='submit' value='Reservar' class='button is-info is-light'/>
                                     </form>
                                 </td>
