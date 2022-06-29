@@ -68,8 +68,16 @@
     include('../templates/header.html');
 ?>
 
-<h1 class="title is-3">¡Aquí Puedes Buscar Vuelos!</h1>
-<br>
+<div class="level">
+    <div class="level-left">
+        <h1 class="title is-3 level-item">¡Aquí Puedes Buscar Vuelos!</h1>
+    </div>
+    <div class="level-right">
+        <form align="center" action="pasajero.php" method="get">
+            <input type="submit" value="Volver" class="button">
+        </form>
+    </div>
+</div>
 <div class="level box">
     <div class="level-left">
         <div class='level-item'>
@@ -97,9 +105,7 @@
             </select>
         
             <label for="fecha" class="level-item"><strong>Fecha de Despegue:</strong></label>
-            <input type="date" name="fecha" id="fecha" class="level-item"/>
-            
-            </span></span> 
+            <input type="date" name="fecha" id="fecha" class="level-item button"/>
 
             <input type="submit" value="Buscar" class="button is-info level-item"/>
         
@@ -108,7 +114,6 @@
 </div>
 
 <h1 class="title is-3">Estos Son Los Vuelos Disponibles Según Tu Búsqueda</h1>
-<br>
 
 <div>
     <table class="table is-bordered is-fullwidth">
@@ -136,7 +141,7 @@
                                 <td>$datos[5]</td>
                                 <td>
                                     <form method='GET' action='reservar.php'>
-                                        <input type='submit' value='Reservar'/>
+                                        <input type='submit' value='Reservar' class='button is-info is-light'/>
                                     </form>
                                 </td>
                             </tr>";
@@ -146,12 +151,6 @@
         </tbody>
     </table>
 </div>
-
-<br>
-<br>
-
-<form align="center" action="pasajero.php" method="get">
-    <input type="submit" value="Volver">
-</form>
+</div>
 </body>
 </html>
