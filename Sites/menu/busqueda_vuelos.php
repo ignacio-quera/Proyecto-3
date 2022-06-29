@@ -2,10 +2,9 @@
     session_start();
     $pasaporte = $_SESSION['user'];
     if (is_null($pasaporte)) {
-        header("Location: https://codd.ing.puc.cl/~grupo57/index.php?");
+        header("Location: ../index.php");
         exit();
     }
-    include('../templates/header.html');
 
     require("../config/conexion.php");
 
@@ -69,52 +68,67 @@
     } else {
         $vuelos = null;
     }
+
+    include('../templates/header.html');
 ?>
 
-<h1 align="center">¡Aquí Puedes Buscar Vuelos!</h1>
-<br>
-
-<form action="" method="GET">
-    <div style="text-align:center">
-        <label for="origen">Ciudad de Origen:</label>
-        <select name="origen" id="origen">
-            <?php
-                foreach($origen_vuelos as $datos){
-                    echo "<option> $datos[0]</opcion>";
-                }
-            ?>
-        </select>
-
-        <label for="destino">Ciudad de Destino:</label>
-        <select name="destino" id="destino">
-            <?php
-                foreach($destino_vuelos as $datos){
-                    echo "<option> $datos[0]</opcion>";
-                }
-            ?>
-        </select>
-
-        <label for="fecha">Fecha de Despegue:</label>
-        <input type="date" name="fecha" id="fecha"/>
-
-        <input type="submit" value="Buscar"/>
+<div class="level">
+    <div class="level-left">
+        <h1 class="title is-3 level-item">¡Aquí Puedes Buscar Vuelos!</h1>
     </div>
-</form>
+    <div class="level-right">
+        <form align="center" action="pasajero.php" method="get">
+            <input type="submit" value="Volver" class="button">
+        </form>
+    </div>
+</div>
+<div class="level box">
+    <div class="level-left">
+        <div class='level-item'>
+            <h1 class="title is-black is-4">Filtrar</h1>
+        </div>
+    </div>
+    <form action="" method="GET">
+        <div class="level-right">
+            <label for="origen" class="level-item"><strong>Ciudad de Origen:</strong></label>
+            <select name="origen" id="origen" class="level-item select">
+                <?php
+                    foreach($origen_vuelos as $datos){
+                        echo "<option> $datos[0]</opcion>";
+                    }
+                ?>
+            </select>
 
-<br>
-<h1 align="center">Estos Son Los Vuelos Disponibles Según Tu Búsqueda</h1>
-<br>
+            <label for="destino" class="level-item"><strong>Ciudad de Destino:</strong></label>
+            <select name="destino" id="destino" class="level-item select">
+                <?php
+                    foreach($destino_vuelos as $datos){
+                        echo "<option> $datos[0]</opcion>";
+                    }
+                ?>
+            </select>
+        
+            <label for="fecha" class="level-item"><strong>Fecha de Despegue:</strong></label>
+            <input type="date" name="fecha" id="fecha" class="level-item button"/>
 
-<div style="margin-right:50px; margin-left:50px;" >
-    <table align="center" class="table table-bordered" margin:4px style="width:100%">
-        <thead class="thead-dark">
+            <input type="submit" value="Buscar" class="button is-info level-item"/>
+        
+        </div>
+    </form>
+</div>
+
+<h1 class="title is-3">Estos Son Los Vuelos Disponibles Según Tu Búsqueda</h1>
+
+<div>
+    <table class="table is-bordered is-fullwidth">
+        <thead class="has-background-grey-dark">
             <tr>
-                <th scope="col">Compañía</th>
-                <th scope="col">Código de Vuelo</th>
-                <th scope="col">Ciudad Despegue</th>
-                <th scope="col">Fecha de Despegue</th>
-                <th scope="col">Ciudad Arribo</th>
-                <th scope="col">Fecha de Arribo</th>
+                <th scope="col" class="has-text-white">Compañía</th>
+                <th scope="col" class="has-text-white">Código de Vuelo</th>
+                <th scope="col" class="has-text-white">Ciudad Despegue</th>
+                <th scope="col" class="has-text-white">Fecha de Despegue</th>
+                <th scope="col" class="has-text-white">Ciudad Arribo</th>
+                <th scope="col" class="has-text-white">Fecha de Arribo</th>
                 <th></th>
             </tr>
         </thead>
@@ -144,12 +158,6 @@
         </tbody>
     </table>
 </div>
-
-<br>
-<br>
-
-<form align="center" action="pasajero.php" method="get">
-    <input type="submit" value="Volver">
-</form>
+</div>
 </body>
 </html>
