@@ -19,7 +19,9 @@
       $.ajax({
         type: "POST",
         url: "funciones/importar_usuarios.php",
-        // sucess: function(respuesta)
+        sucess: function(respuesta) {
+          alert(`respuesta`)
+        }
       });
     };
 

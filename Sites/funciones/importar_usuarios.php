@@ -1,6 +1,8 @@
 <?php
     require("../config/conexion.php");
 
+
+    $array_usuarios_no_importados = array();
     // Query usuarios totales en db
     $query_usuarios = "SELECT *
                        FROM usuarios;";
@@ -27,9 +29,9 @@
         try {
             $db1 ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $db1 -> exec($admin_q);
-            echo "New record created successfully";
         } catch(PDOException $e) {
-            echo "<br>";
+            $error_dgac = "No se ha podido crear el usuario DGAC";
+            array_push($array_usuarios_no_importados, $error_dgac);
         }
     }
 
@@ -61,6 +63,8 @@
     }
 
     // ingresar usuarios ca a db con password al azar
+
+    $n_ca_no_importadas = 0;
     foreach ($array_ca as $compania) {
         if (!(in_array($compania[0], $array_usuarios_ca))) {
             $id = $n_usuarios+1;
@@ -77,9 +81,13 @@
                 $db1 ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $db1 -> exec($user_ca);
             } catch(PDOException $e) {
-                echo "<br>";
+                $n_ca_no_importadas += 1;
             }
         }
+    }
+    if ($n_ca_no_importadas != 0) {
+        $error_ca = "No se han podido importar $n_ca_no_importadas companias aereas";
+        array_push($array_usuarios_no_importados, $error_dgac);
     }
 
     // Query usuarios compañia aerea en db
@@ -113,6 +121,7 @@
     print_r($array_usuarios_pasajero);
 
     // ingresar usuarios ca a db con password al azar
+    $n_pasajeros_no_importados = 0;
     foreach ($array_pasajeros as $pasajero) {
         if (!(in_array($pasajero[0], $array_usuarios_pasajero))) {
             $id = $n_usuarios+1;
@@ -137,8 +146,14 @@
                 $db1 ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $db1 -> exec($user_pasajero);
             } catch(PDOException $e) {
-                echo "<br>";
+                $n_pasajeros_no_importados += 1;
             }
         }
     }
+    if ($n_pasajeros_no_importados != 0) {
+        $error_ca = "No se han podido importar $n_ca_no_importadas pasajeros";
+        array_push($array_usuarios_no_importados, $error_dgac);
+    }
+
+    echo json_encode($array_usuarios_no_importados);
 ?>

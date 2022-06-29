@@ -148,6 +148,7 @@
                                         <input type='hidden' name='origen' value='$origen' />
                                         <input type='hidden' name='destino' value='$destino' />
                                         <input type='hidden' name='fecha' value='$fecha' />
+                                        <input type='hidden' name='codigo' value='$datos[1]' />
                                         <input type='submit' value='Reservar'/>
                                     </form>
                                 </td>
